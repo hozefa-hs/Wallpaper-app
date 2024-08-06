@@ -5,7 +5,7 @@ class WallpaperModel {
   String? url;
   String? src;
   String? original;
-  String? large2x;
+  String large2x;
   String? large;
   String? medium;
   String? small;
@@ -19,7 +19,7 @@ class WallpaperModel {
       this.url,
       this.src,
       this.original,
-      this.large2x,
+      required this.large2x,
       this.large,
       this.medium,
       this.small,

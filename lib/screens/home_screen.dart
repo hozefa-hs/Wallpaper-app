@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wallpaper_app/services/home_data.dart';
+import 'package:wallpaper_app/controllers/home_data.dart';
+import 'package:wallpaper_app/screens/set_wallpaper_screen.dart';
 
 import '../models/home_model.dart';
 
@@ -31,21 +32,25 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<WallpaperModel> imagesList = [];
-  bool _loading = true;
 
   @override
   void initState() {
+    super.initState();
     // TODO: implement initState
-    getWallpapers();
+
+    Future.delayed(
+      const Duration(seconds: 4),
+      () {
+        getWallpapers();
+      },
+    );
   }
 
   getWallpapers() async {
     Wallpaper wallpaper = Wallpaper();
     await wallpaper.getWallpaper();
     imagesList = wallpaper.wallpaperImages;
-    setState(() {
-      _loading = false;
-    });
+    setState(() {});
   }
 
   @override
@@ -75,56 +80,89 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        body: Container(
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    categoryTile(Colors.black, Colors.white, "Recent"),
-                    categoryTile(Color(0xFFDBDBDB), Colors.black, "Trending"),
-                    categoryTile(Color(0xFFDBDBDB), Colors.black, "Popular"),
-                    categoryTile(Color(0xFFDBDBDB), Colors.black, "Nature"),
-                    categoryTile(Color(0xFFDBDBDB), Colors.black, "Solid"),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Container(
-                height: 50.h,
-                width: 330.w,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Color(0xFFDBDBDB), width: 2),
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                    child: FaIcon(FontAwesomeIcons.magnifyingGlass),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Expanded(
-                child: GridView.builder(
-                    itemCount: imagesList.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 2 / 3,
-                      // crossAxisSpacing: 5,
-                      // mainAxisSpacing: 5,
+        body: imagesList.isNotEmpty
+            ? Column(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        categoryTile(Colors.black, Colors.white, "Recent"),
+                        categoryTile(
+                            Color(0xFFDBDBDB), Colors.black, "Trending"),
+                        categoryTile(
+                            Color(0xFFDBDBDB), Colors.black, "Popular"),
+                        categoryTile(Color(0xFFDBDBDB), Colors.black, "Nature"),
+                        categoryTile(Color(0xFFDBDBDB), Colors.black, "Solid"),
+                      ],
                     ),
-                    itemBuilder: (context, index) {
-                      return gridTile(src: imagesList[index].tiny);
-                    }),
+                  ),
+                  SizedBox(height: 10.h),
+                  Container(
+                    height: 50.h,
+                    width: 330.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: Color(0xFFDBDBDB), width: 2),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 5),
+                        child: FaIcon(FontAwesomeIcons.magnifyingGlass),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Expanded(
+                    child: GridView.builder(
+                        itemCount: imagesList.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 2 / 3,
+                          // crossAxisSpacing: 5,
+                          // mainAxisSpacing: 5,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FullScreen(
+                                      imageurl: imagesList[index].large2x),
+                                ),
+                              );
+                            },
+                            child: gridTile(src: imagesList[index].tiny),
+                          );
+                        }),
+                  ),
+                ],
+              )
+            : const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    strokeWidth: 3,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Bringing the world's beauty to your screen, just a moment...",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
       ),
     );
   }

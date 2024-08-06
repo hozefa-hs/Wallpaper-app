@@ -21,6 +21,7 @@ class Wallpaper {
       WallpaperModel wallpaperModel = WallpaperModel(
         photographer: element["photographer"],
         tiny: element["src"]["portrait"],
+        large2x: element["src"]["large2x"],
       );
       wallpaperImages.add(wallpaperModel);
     });
