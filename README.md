@@ -23,10 +23,9 @@ flutter run
 
 ## Screenshots
 
-| Screen Name | Screenshot |
-| --- | --- |
-| Welcome Screen | ![Wallpaper 1](https://github.com/user-attachments/assets/5ed2712e-291d-4c7c-bbb4-5469eda41b87) |
-| Home Screen | ![Wallpaper 2](https://github.com/user-attachments/assets/d3311acd-91a4-43e1-80ca-35e6deb5a7c5) |
+| Welcome Screen | Home Screen | Home Screen | Full Screen | Set Wallpaper
+| --- | --- | --- | --- | --- |
+| ![Wallpaper 1](https://github.com/user-attachments/assets/5ff9350d-a6f6-4d47-911e-e4627bc18722) | ![Wallpaper 2](https://github.com/user-attachments/assets/98392e8e-af86-485c-9806-45bc791aca08) | ![Wallpaper 3](https://github.com/user-attachments/assets/265ed6fc-93dc-4647-b812-cb56fc286611) | ![Wallpaper 4](https://github.com/user-attachments/assets/3c4bfce8-cdd3-4204-9392-d7219efd4e49) | ![Wallpaper 5](https://github.com/user-attachments/assets/f3d7bb84-5bdc-4cfc-93b3-693baf642df0)
 
 
 ## Contributions
