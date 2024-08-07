@@ -33,10 +33,4 @@ Feel free to contribute to this project by creating pull requests or opening iss
 
 
 ## Connect with me
-[Linkedin]([url](https://www.linkedin.com/in/hozefa-sailanawala/))
-
-
-
-
-
-
+For more updates and to connect with me, follow me on [LinkedIn](https://www.linkedin.com/in/hozefa-sailanawala/).
